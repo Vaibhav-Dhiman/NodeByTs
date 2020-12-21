@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logging from './config/logging';
 import config from './config/config';
+import sampleRoutes from './routes/samples';
 
 const NAMESPACE = 'Server';
 const router = express();
@@ -44,6 +45,8 @@ router.use((req, res, next) => {
 });
 
 // routes here
+// get url to hit = http://localhost:1337/samples/ping
+router.use('/samples', sampleRoutes);
 
 // error handlings
 router.use((req, res, next) => {
