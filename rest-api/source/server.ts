@@ -10,8 +10,10 @@ const NAMESPACE = 'Server';
 const router = express();
 
 /** Connect to Mongo */
+// console.info(config.mongo.url);
+// console.info(config.server.hostname);
 mongoose
-    .connect('mongodb://127.0.0.1:27017/book')
+    .connect(config.mongo.url)
     .then((result) => {
         logging.info(NAMESPACE, 'Mongo Connected');
     })
@@ -39,7 +41,6 @@ router.use((req, res, next) => {
         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
         return res.status(200).json({});
     }
-
     next();
 });
 

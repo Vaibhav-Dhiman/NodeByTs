@@ -12,7 +12,7 @@ const MONGO_OPTIONS = {
     retryWrites: false
 };
 
-const MONGO_USERNAME = process.env.MONGO_USERNAME || 'Admin';
+const MONGO_USERNAME = process.env.MONGO_USERNAME || '';
 const MONGO_PASSWORD = process.env.MONGO_USERNAME || '';
 const MONGO_HOST = process.env.MONGO_URL || `mongodb://127.0.0.1:27017/book`;
 
@@ -21,7 +21,7 @@ const MONGO = {
     password: MONGO_PASSWORD,
     username: MONGO_USERNAME,
     options: MONGO_OPTIONS,
-    url: `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}`
+    url: `${MONGO_HOST}`
 };
 
 const SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || '127.0.0.1';
