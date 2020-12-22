@@ -3,7 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logging from './config/logging';
 import config from './config/config';
-import sampleRoutes from './routes/samples';
+import bookRoutes from './routes/book';
 
 const NAMESPACE = 'Server';
 const router = express();
@@ -46,7 +46,7 @@ router.use((req, res, next) => {
 
 // routes here
 // get url to hit = http://localhost:1337/samples/ping
-router.use('/samples', sampleRoutes);
+router.use('/books', bookRoutes);
 
 // error handlings
 router.use((req, res, next) => {
