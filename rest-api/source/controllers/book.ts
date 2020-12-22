@@ -43,4 +43,23 @@ const getAllBooks = (req: Request, res: Response, next: NextFunction) => {
         });
 };
 
-export default { createBook, getAllBooks };
+const getBook = (req: Request, res: Response, next: NextFunction) => {
+    //  let { id } = req.body;
+    const id = req.params.id;
+    console.info(id);
+    Book.find({ _id: id })
+        .exec()
+        .then((books) => {
+            return res.status(200).json({
+                books: books
+            });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
+        });
+};
+
+export default { createBook, getAllBooks, getBook };
