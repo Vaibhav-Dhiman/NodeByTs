@@ -63,19 +63,10 @@ const getBook = (req: Request, res: Response, next: NextFunction) => {
 
 const deleteBook = (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
-    Book.find({ _id: id })
-        .exec()
-        .then((books) => {
-            return res.status(200).json({
-                books: books
-            });
-        })
-        .catch((error) => {
-            return res.status(500).json({
-                message: error.message,
-                error
-            });
-        });
+    Book.find({ _id: id }).remove().exec();
+    return res.status(200).json({
+        message: 'Book Deleted Sucessfully'
+    });
 };
 
 const updateBook = (req: Request, res: Response, next: NextFunction) => {
