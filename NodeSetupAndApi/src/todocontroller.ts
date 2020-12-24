@@ -1,6 +1,7 @@
 import * as express from 'express';
-import { MongoClient } from 'mongodb';
 import { MongoHelper } from './mongohelper';
+import * as mongodb from 'mongodb';
+
 const todoRoutes = express.Router();
 
 const getCollection = () => {
@@ -22,18 +23,24 @@ todoRoutes.get('/todo', (req: express.Request, res:express.Response, next: expre
 });
 
 todoRoutes.post('/todo', (req: express.Request, res:express.Response, next: express.NextFunction) => {
-    console.info(req.body);
+    const description = req.body['description'];
+    const collection = getCollection();
+    collection.insertOne({description: description});
     res.end();
 });
 
 todoRoutes.put('/todo/:id', (req: express.Request, res:express.Response, next: express.NextFunction) => {
-    console.info(req.body);
-    console.info(req.params.id);
+    const description = req.body['description'];
+    const id = req.params['id'];
+    const collection = getCollection();
+    collection.findOneAndUpdate({"_id": new mongodb.ObjectId(id)}, {description: description});
     res.end();
 });
 
 todoRoutes.delete('/todo/:id', (req: express.Request, res:express.Response, next: express.NextFunction) => {
-    console.info(req.params.id);
+   const id = req.params['id'];
+   const collection = getCollection();
+   collection.deleteOne({"_id": new mongodb.ObjectId(id)});
     res.end();
 });
 
