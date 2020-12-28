@@ -28,6 +28,7 @@ todoRoutes.get('/todo', (req: express.Request, res:express.Response, next: expre
             message: 'Get Items'
         });
       }
+      res.end();
    });
 });
 
@@ -49,6 +50,7 @@ todoRoutes.post('/todo', (req: express.Request, res:express.Response, next: expr
              { throw err; }
       }
       }); 
+      //res.end();
 });
 
 todoRoutes.put('/todo/:id', (req: express.Request, res:express.Response, next: express.NextFunction) => {
@@ -71,7 +73,7 @@ todoRoutes.delete('/todo/:id', (req: express.Request, res:express.Response, next
    const collection = getCollection();
    collection.deleteOne({"_id": new mongodb.ObjectId(id)});
    res.status(200).json({ message: 'Deleted Sucessfully' });
-    //res.end();
+    res.end();
 });
 
 export { todoRoutes }
