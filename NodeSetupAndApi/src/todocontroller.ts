@@ -55,19 +55,23 @@ todoRoutes.put('/todo/:id', (req: express.Request, res:express.Response, next: e
     const description = req.body['description'];
     const id = req.params['id'];
     const collection = getCollection();
-    collection.findOneAndUpdate({_id: id}, {$set: {description: description}}, {upsert: true}, function(err,doc) {
+    collection.findOneAndUpdate({_id: new mongodb.ObjectId(id)}, {$set: {description: description}}, {upsert: true}, function(err,doc) {
         if (err) { throw err; }
-        else { res.status(200).json({ message: 'Updated Sucessfully' }); }
-      }); 
-    res.end();
+        else {
+             return res.status(200).json({
+             message: 'Item Updated'}); 
+            }
+});
+    //res.end();
 });
 
 todoRoutes.delete('/todo/:id', (req: express.Request, res:express.Response, next: express.NextFunction) => {
    const id = req.params['id'];
+   console.info(id);
    const collection = getCollection();
    collection.deleteOne({"_id": new mongodb.ObjectId(id)});
    res.status(200).json({ message: 'Deleted Sucessfully' });
-    res.end();
+    //res.end();
 });
 
 export { todoRoutes }
