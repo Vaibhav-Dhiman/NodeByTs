@@ -32,8 +32,16 @@ todoRoutes.post('/todo', (req: express.Request, res:express.Response, next: expr
 todoRoutes.put('/todo/:id', (req: express.Request, res:express.Response, next: express.NextFunction) => {
     const description = req.body['description'];
     const id = req.params['id'];
+    //console.info(description, id);
     const collection = getCollection();
-    collection.findOneAndUpdate({"_id": new mongodb.ObjectId(id)}, {description: description});
+    ///
+    collection.findOneAndUpdate({_id: id}, {$set: {description: description}}, {upsert: true}, function(err,doc) {
+        if (err) { throw err; }
+        else { console.info("Record Updated"); }
+      }); 
+    ///
+    //console.info(collection);
+   // collection.findOneAndUpdate({"_id": id}, {$set:{description: description}},{returnOriginal:true});
     res.end();
 });
 
