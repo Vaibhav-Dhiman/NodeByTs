@@ -13,34 +13,42 @@ todoRoutes.get('/todo', (req: express.Request, res:express.Response, next: expre
    collection.find({}).toArray((err, items) => {
       if(items.length == 0)
       {
-        res.status(200).json({ message: 'Add items' });
+        return res.status(200).json({
+            todos: items,
+            message: 'No Items'
+        });
       }
-      if(err) {
+      else if(err) {
           res.status(500);
           res.end();
-         // console.error('Caught error', err);
       } else {
           items = items.map((item) => { return {id: item._id, description: item.description}});
-          res.json(items);
+          return res.status(200).json({
+            todos: items,
+            message: 'Get Items'
+        });
       }
    });
 });
 
 todoRoutes.post('/todo', (req: express.Request, res:express.Response, next: express.NextFunction) => {
-    res.setHeader('Content-Type', 'text/html');
     const description = req.body['description'];
     const collection = getCollection();
     collection.findOneAndUpdate({description: description}, {$set: {description: description}}, 
         {upsert: true}, function(err,doc) {
-        if(doc.value === null || doc.value === '') {
-            {   return res.status(404).json({ error: "No Profile Found" });
+        if(doc.value)
+            res.status(200).json({ message: 'Item Already Exits' });
+        else if(doc.value === null || doc.value === '') {
+            {   return res.status(200).json({
+               // todos: doc.value,
+                message: 'New Item Added'
+            });
         }
     }
-      //else res.status(200).json({ message: 'Record Already Exits' });
-      //  if (err) { throw err; }
+      else {
+             { throw err; }
+      }
       }); 
-    res.end();
-    next();
 });
 
 todoRoutes.put('/todo/:id', (req: express.Request, res:express.Response, next: express.NextFunction) => {
