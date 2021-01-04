@@ -40,21 +40,19 @@ export class ProductsService {
     }
 
    async  updateProduct(productId: string, title: string, description: string, price:number) {
-       
-       // const [product,index] = this.findProduct(productId);
-       // const updatedProduct = {...product};
+        const updatedProduct = await this.findProduct(productId);
+
         if(title) {
-          //  updatedProduct.title = title;
+           updatedProduct.title = title;
         }
         if(description) {
-           // updatedProduct.description = description;
+           updatedProduct.description = description;
         }
         if(price) {
-           // updatedProduct.price = price;
+           updatedProduct.price = price;
         }
-
-        //this.products[index] = updatedProduct;
-        return title;
+        updatedProduct.save();
+        return updatedProduct;
     }
 
     deleteProduct(prodId: string) {
