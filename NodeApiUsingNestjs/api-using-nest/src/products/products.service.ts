@@ -39,7 +39,8 @@ export class ProductsService {
         };
     }
 
-    updateProduct(productId: string, title: string, description: string, price:number) {
+   async  updateProduct(productId: string, title: string, description: string, price:number) {
+       
        // const [product,index] = this.findProduct(productId);
        // const updatedProduct = {...product};
         if(title) {

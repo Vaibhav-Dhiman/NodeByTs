@@ -1,5 +1,4 @@
 import { Controller, Post, Body, Get, Param, Patch, Delete } from '@nestjs/common';
-import { title } from 'process';
 import { ProductsService } from './products.service';
 
 @Controller('products')
@@ -8,7 +7,7 @@ export class ProductsController {
 
     @Post()
    async addProduct(
-        @Body('title') prodTitle: string, 
+        @Body('title') title: string, 
         @Body('description') description: string,
         @Body('price') price: number,
         ) {
@@ -29,13 +28,13 @@ export class ProductsController {
     }
 
     @Patch(':id')
-    updateProduct(
+   async  updateProduct(
         @Param('id') prodId: string,
         @Body('title') prodTitle: string,
         @Body('description') prodDescription: string,
         @Body('price') prodPrice: number,
     ) {
-        return this.productService.updateProduct(prodId,prodTitle,prodDescription, prodPrice);
+        return await this.productService.updateProduct(prodId,prodTitle,prodDescription, prodPrice);
     }
 
     @Delete(':id')
