@@ -23,8 +23,8 @@ export class ProductsController {
     }
 
     @Get(':id')
-    getProduct(@Param('id') prodId: string) {
-        const product = this.productService.getProduct(prodId);
+    async getProduct(@Param('id') prodId: string) {
+        const product = await this.productService.getProduct(prodId);
         return {Product: product};
     }
 
