@@ -2,6 +2,7 @@ import { Injectable,NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Product } from './product.model';
+import { CreateProductDTO } from './dtos/create-product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -11,9 +12,10 @@ export class ProductsService {
     @InjectModel('Product') private readonly productModel: Model<Product>,
   ) {}
 
-    async insertProduct(title: string, desc:string, price: number) {
+    async insertProduct(createProductDTO: CreateProductDTO) {
         // const prodId = Math.random().toString();
-        const newProduct = new this.productModel({title, description: desc, price});
+        const newProduct = new this.productModel({title: createProductDTO.title, 
+                                description: createProductDTO.description, price: createProductDTO.price});
         // this.products.push(newProduct);
         const result = await newProduct.save();
         return result.id;
@@ -39,17 +41,17 @@ export class ProductsService {
         };
     }
 
-   async  updateProduct(productId: string, title: string, description: string, price:number) {
+   async  updateProduct(productId: string, updateProductDTO: CreateProductDTO) {
         const updatedProduct = await this.findProduct(productId);
 
-        if(title) {
-           updatedProduct.title = title;
+        if(updateProductDTO.title) {
+           updatedProduct.title = updateProductDTO.title;
         }
-        if(description) {
-           updatedProduct.description = description;
+        if(updateProductDTO.description) {
+           updatedProduct.description = updateProductDTO.description;
         }
-        if(price) {
-           updatedProduct.price = price;
+        if(updateProductDTO.price) {
+           updatedProduct.price = updateProductDTO.price;
         }
         updatedProduct.save();
         return updatedProduct;
