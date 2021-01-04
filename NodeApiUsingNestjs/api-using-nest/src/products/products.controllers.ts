@@ -38,8 +38,8 @@ export class ProductsController {
     }
 
     @Delete(':id')
-    deleteProduct(@Param('id') prodId: string) {
-        return this.productService.deleteProduct(prodId);
+   async deleteProduct(@Param('id') prodId: string) {
+        return await this.productService.deleteProduct(prodId);
     }
 }
 
