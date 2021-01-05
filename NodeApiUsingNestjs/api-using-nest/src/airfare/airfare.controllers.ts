@@ -3,7 +3,7 @@ import { AirFareService } from './airfare.service';
 import { FindFlightstDTO } from './dtos/airfarePost.dto';
 
 @Controller('airfare')
-export class ProductsController {
+export class AirfareController {
     constructor(private readonly productService: AirFareService) {}
 
     @Post()
