@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ProductsModule } from './products/product.module';
-import { ProductsController } from './products/products.controllers';
-import { ProductsService } from './products/products.service';
 import { MongooseModule } from '@nestjs/mongoose';
 
 // mongodb://127.0.0.1:27017/book
