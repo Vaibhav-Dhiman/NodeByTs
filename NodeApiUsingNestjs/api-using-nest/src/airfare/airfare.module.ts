@@ -6,9 +6,9 @@ import { AirfareController } from './airfare.controllers';
 import { AirFareService } from './airfare.service';
 
 @Module({
-    imports: [MongooseModule.forFeature([{name: 'Product', schema: AirfareSchema}])],
+    imports: [],
     controllers: [AirfareController],
     providers: [AirFareService]
 })
 
-export class ProductsModule{}
+export class AirfareModule{}
