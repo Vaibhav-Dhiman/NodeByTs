@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { AirfareSchema } from './airfare.model';
 
-import { AirfareController } from './airfare.controllers';
+import { AirfareController } from './airfare.controller';
 import { AirFareService } from './airfare.service';
 
 @Module({
