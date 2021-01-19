@@ -1,12 +1,11 @@
 import * as mongoose from 'mongoose';
 
 export const UserSchema = new mongoose.Schema({
-    id: String,
-    first_name: String,
-    last_name: String,
+    firstName: String,
+    lastName: String,
     email: String,
+    phone: Number,
     password: String,
-    phone: String,
     address: String,
-    created_at: { type: Date, default: Date.now }
+    created_date: { type: Date, default: Date.now}
 })

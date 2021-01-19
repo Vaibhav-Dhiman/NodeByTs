@@ -8,7 +8,8 @@ import { CreateUserDTO } from './dto/create-user.dto';
 @Injectable()
 export class UserService {
     constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
-    async addUser() {
-       return 'user service called'
+    async addUser(createUserDTO: CreateUserDTO): Promise<User> {
+       const user = await new this.userModel(createUserDTO);
+       return user.save();
     }
 }
