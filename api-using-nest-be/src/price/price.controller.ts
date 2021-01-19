@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Get, Param, Patch, Delete } from '@nestjs/common';
-import { AirFareService } from './price.service';
+import { PriceService } from './price.service';
 
-@Controller('airfare')
-export class AirfareController {
-    constructor(private readonly productService: AirFareService) {}
+@Controller('price')
+export class PriceController {
+    constructor(private readonly priceService: PriceService) {}
 
-    @Get('/getflights')
-    async getAllFlights()  {
-        const products = await this.productService.findFlights();
+    @Get('/getprice')
+    async getAllPrice()  {
+        const products = await this.priceService.findFlights();
         return products;
     }
 }

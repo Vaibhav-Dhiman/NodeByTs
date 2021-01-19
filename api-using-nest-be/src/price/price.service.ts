@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AirFareService {
+export class PriceService {
     async findFlights() {
-       return 'airfare service called'
+       return 'prince service called'
     }
 }

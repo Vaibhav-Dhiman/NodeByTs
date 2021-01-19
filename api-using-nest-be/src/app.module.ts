@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AirfareModule } from './airfare/airfare.module';
+import { PriceModule } from './price/price.module';
 import {ProductModule} from './product/product.module';
 // mongodb://127.0.0.1:27017/book
 @Module({
-  imports: [AirfareModule, ProductModule],
+  imports: [PriceModule, ProductModule],
   controllers: [],
   providers: [],
 })
