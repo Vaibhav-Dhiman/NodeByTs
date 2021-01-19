@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { AirfareController } from './airfare.controller';
-import { AirFareService } from './airfare.service';
+import { AirfareController } from './price.controller';
+import { AirFareService } from './price.service';
 
 @Module({
     imports: [],
