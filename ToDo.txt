@@ -1,3 +1,4 @@
 backend user-
 
-1. login api with jwt token.
+1. create user api, with password hashing and salting with mongo db.
+2 . login api with jwt token.
