@@ -1,13 +1,14 @@
 import { Controller, Post, Body,HttpStatus, Get, Param, Patch, Delete, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDTO } from './dto/create-user.dto';
+import { UserLoginDTO } from './dto/user-login.dto';
 
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post('/adduser')
-    async getAllProducts(@Res() res, @Body() createUserDto: CreateUserDTO)  {
+    async addUser(@Res() res, @Body() createUserDto: CreateUserDTO)  {
         const user = await this.userService.addUser(createUserDto);
         if(user == true) {
             return res.status(HttpStatus.OK).json({
@@ -25,5 +26,14 @@ export class UserController {
                 message: "Unable to add user"
             })
         }
+    }
+
+    @Post('/login')
+    async userLogin(@Res() res, @Body() userLoginDTO:UserLoginDTO) {
+        const user = await this.userService.userLogin(userLoginDTO);
+        return res.status(HttpStatus.OK).json({
+            message: "User login Successfully",
+            user
+        });
     }
 }

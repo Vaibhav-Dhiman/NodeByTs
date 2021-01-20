@@ -7,5 +7,7 @@ export const UserSchema = new mongoose.Schema({
     phone: String,
     password: String,
     address: String,
-    created_date: { type: Date, default: Date.now}
+    createdDate: { type: Date, default: Date.now},
+    isActive: { type: Boolean, default: true },
+    isDelete: { type: Boolean, default: false },
 })

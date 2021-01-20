@@ -4,7 +4,8 @@ backend user-
 - user collection created, with insert data into user table,
 - insert only if user not exists
 - dto validations
-* need to create password has and salt for storing password
+- login method added
+- password hash creation and storing done
 * create jwt token when user logins
 
 2 . login api with jwt token.
