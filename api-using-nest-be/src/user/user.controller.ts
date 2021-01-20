@@ -15,6 +15,11 @@ export class UserController {
                 user
             })
         }
+        else if (user == null && user == undefined ) {
+            return res.status(HttpStatus.BAD_REQUEST).json({
+                message: "User email already exists"
+            })
+        }
         else {
             return res.status(HttpStatus.BAD_REQUEST).json({
                 message: "Unable to add user"
