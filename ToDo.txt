@@ -3,6 +3,7 @@ backend user-
 1. create user api, with password hashing and salting with mongo db.
 - user collection created, with insert data into user table,
 - insert only if user not exists
+- dto validations
 * need to create password has and salt for storing password
 * create jwt token when user logins
 

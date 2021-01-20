@@ -9,10 +9,10 @@ export class UserController {
     @Post('/adduser')
     async getAllProducts(@Res() res, @Body() createUserDto: CreateUserDTO)  {
         const user = await this.userService.addUser(createUserDto);
-        if(user !== null && user !== undefined) {
+        if(user == true) {
             return res.status(HttpStatus.OK).json({
-                message: "User has been created successfully",
-                user
+                message: "User has been created successfully"//,
+                //user
             })
         }
         else if (user == null && user == undefined ) {

@@ -1,5 +1,5 @@
-import { IsString, Length, IsOptional, IsEmail, IsNotEmpty, IsMobilePhone, Min, Max, IsInt } from "class-validator";
-
+import { IsString, Length, IsEmail, IsNotEmpty, IsMobilePhone } from "class-validator";
+import { Exclude } from 'class-transformer';
 export class CreateUserDTO {
     @IsNotEmpty()
     @IsString()
@@ -14,7 +14,7 @@ export class CreateUserDTO {
     
     @IsNotEmpty()
     @Length(4)
-    readonly password: string;
+    password: string;
     
     @IsNotEmpty()
     @IsMobilePhone()

@@ -8,13 +8,25 @@ import { CreateUserDTO } from './dto/create-user.dto';
 export class UserService {
     constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
     async addUser(createUserDTO: CreateUserDTO): Promise<any> {
-      const userExists = await this.findUserByEmail(createUserDTO.email);
-      if (userExists == null) {
-        const user = await new this.userModel(createUserDTO);
-        return user.save();
-      }
+      
+      try {
+        const userExists = await this.findUserByEmail(createUserDTO.email);
+        if (userExists == null) {
+          const hashPassword = this.generatePasswordHashSalt(createUserDTO.password);
+          createUserDTO.password = hashPassword;
+          const user = await new this.userModel(createUserDTO).save();
+          if(user !== null && user !== undefined ) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        }
     }
-
+      catch(err) {
+        console.log(err);
+      }
+  }
 
     async findUserByEmail(email:string) {
         const user = await this.userModel.findOne({email: email});
@@ -22,5 +34,12 @@ export class UserService {
             return user;
         }
         return null;
+    }
+
+     generatePasswordHashSalt(password: string) {
+      var bcrypt = require('bcrypt');
+      var salt = bcrypt.genSaltSync(10);
+      var hash = bcrypt.hashSync("B4c0/\/", salt);
+      return hash;
     }
 }
