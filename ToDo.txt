@@ -6,6 +6,7 @@ backend user-
 - dto validations
 - login method added
 - password hash creation and storing done
+- login without jwt token done with bcrypt password
 * create jwt token when user logins
 now push to dev branch as product-fare-dev and merge to product-fare
 2 . login api with jwt token.
