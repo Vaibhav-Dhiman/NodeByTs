@@ -7,5 +7,5 @@ backend user-
 - login method added
 - password hash creation and storing done
 * create jwt token when user logins
-
+now push to dev branch as product-fare-dev and merge to product-fare
 2 . login api with jwt token.

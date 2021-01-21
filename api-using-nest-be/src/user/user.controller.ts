@@ -31,9 +31,19 @@ export class UserController {
     @Post('/login')
     async userLogin(@Res() res, @Body() userLoginDTO:UserLoginDTO) {
         const user = await this.userService.userLogin(userLoginDTO);
-        return res.status(HttpStatus.OK).json({
-            message: "User login Successfully",
-            user
-        });
+        if(user !== null && user !== undefined) {
+            return res.status(HttpStatus.OK).json({
+                message: "User login Successfully",
+                user
+            });
+        }
+
+        else {
+            return res.status(HttpStatus.OK).json({
+                message: "Incorrect email or password"//,
+                //user
+            });
+        }
+      
     }
 }
