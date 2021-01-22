@@ -7,7 +7,7 @@ import { UserLoginDTO } from './dto/user-login.dto';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    @Post('/adduser')
+    @Post('/add')
     async addUser(@Res() res, @Body() createUserDto: CreateUserDTO)  {
         const user = await this.userService.addUser(createUserDto);
         if(user == true) {
@@ -45,5 +45,20 @@ export class UserController {
             });
         }
       
+    }
+
+    @Get('/info/:email')
+    async userInfo(@Res() res, @Param('email') email) {
+       const user = await this.userService.findUserByEmail(email);
+       if (user) {
+           return res.status(HttpStatus.OK).json({
+               user
+           });
+       }
+       else {
+            return res.status(HttpStatus.OK).json({
+                message: "Something went wrong"
+            });
+       }
     }
 }
