@@ -2,6 +2,7 @@ import { Controller, Post, Body,HttpStatus, Get, Param, Patch, Delete, Res } fro
 import { UserService } from './user.service';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UserLoginDTO } from './dto/user-login.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
@@ -46,7 +47,8 @@ export class UserController {
         }
       
     }
-
+    
+    @ApiBearerAuth()
     @Get('/info:email')
     async userInfo(@Res() res, @Param('email') email: string) {
        const user = await this.userService.findUserByEmail(email);

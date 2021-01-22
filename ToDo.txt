@@ -1,6 +1,5 @@
-backend user-
-
-1. create user api, with password hashing and salting with mongo db.
+backend user tasks-
+- create user api, with password hashing and salting with mongo db.
 - user collection created, with insert data into user table,
 - insert only if user not exists
 - dto validations
@@ -8,8 +7,7 @@ backend user-
 - password hash creation and storing done
 - login without jwt token done with bcrypt password
 -created jwt token when user logins
-* add swagger for api test 
+- add swagger for api test 
+* add get bearer token get to swagger to authorized api's
 * forget password/reset password
-
-
-2 . login api with jwt token.
+* send mail on restting new password

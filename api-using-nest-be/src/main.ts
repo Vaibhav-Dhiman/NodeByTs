@@ -10,6 +10,10 @@ async function bootstrap() {
   .setTitle('My API')
   .setDescription('API description')
   .setVersion('1.0')
+  .addBearerAuth(
+    { type: 'http', scheme: 'bearer', bearerFormat: 'Token' },
+    'access-token',
+  )
   .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('product-fare-api', app, document);
