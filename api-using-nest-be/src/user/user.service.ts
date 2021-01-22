@@ -39,7 +39,7 @@ export class UserService {
           let payload = `${userLoginDTO.password}${userLoginDTO.email}`;
           const accessToken = this.jwtService.sign(payload);
           return {
-            expires_in: 3600,
+             expires_in: 3600,
             access_token: accessToken,
             user
          };
