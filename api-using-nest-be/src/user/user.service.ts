@@ -31,15 +31,15 @@ export class UserService {
     }
 
     async userLogin(userLoginDTO: UserLoginDTO): Promise<any> {
-      const user = await this.findUserByEmail(userLoginDTO.email);
+      let user = await this.findUserByEmail(userLoginDTO.email);
       if (user !== null) {
         const hashPasswordFrmDb = user.password;
         const check =  await this.checkLogin(userLoginDTO.password, hashPasswordFrmDb);
         if (check == true) {
-          let payload = `${userLoginDTO.password}${userLoginDTO.email}`;
+          const payload = `${userLoginDTO.password}${userLoginDTO.email}`;
           const accessToken = this.jwtService.sign(payload);
           return {
-             expires_in: 3600,
+            expires_in: 3600,
             access_token: accessToken,
             user
          };
@@ -58,7 +58,20 @@ export class UserService {
     }
 
     async findUserByEmail(email:string) {
-        const user = this.userModel.findOne({email: email});
+        const user = this.userModel.findOne({email: email}
+          // , {_id: false, 
+          //           password: false, 
+          //           createdDate: false, 
+          //           isActive: false, 
+          //           isDelete: false }
+          )
+            // .select({_id: false, 
+            //   password: true, 
+            //   email: true, 
+            //   phone: true, 
+            //   address: true}
+            
+            // );
         if(user != null) {
             return user;
         }

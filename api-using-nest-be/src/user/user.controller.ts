@@ -47,8 +47,8 @@ export class UserController {
       
     }
 
-    @Get('/info/:email')
-    async userInfo(@Res() res, @Param('email') email) {
+    @Get('/info:email')
+    async userInfo(@Res() res, @Param('email') email: string) {
        const user = await this.userService.findUserByEmail(email);
        if (user) {
            return res.status(HttpStatus.OK).json({
