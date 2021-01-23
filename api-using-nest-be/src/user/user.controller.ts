@@ -1,14 +1,16 @@
-import { Controller, Post, Body,HttpStatus, Get, Param, Patch, Delete, Res } from '@nestjs/common';
+import { Controller, Post, Body,HttpStatus, Get, Param, Patch, Delete, Res, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UserLoginDTO } from './dto/user-login.dto';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiOkResponse, ApiResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post('/add')
+    @ApiCreatedResponse({description: 'Add User'})
+    @ApiBody({type: CreateUserDTO})
     async addUser(@Res() res, @Body() createUserDto: CreateUserDTO)  {
         const user = await this.userService.addUser(createUserDto);
         if(user == true) {
@@ -30,6 +32,9 @@ export class UserController {
     }
 
     @Post('/login')
+    @ApiOkResponse({description: 'User login'})
+    @ApiUnauthorizedResponse({description: 'Invalid creadentinals'})
+    @ApiBody({type: UserLoginDTO})
     async userLogin(@Res() res, @Body() userLoginDTO:UserLoginDTO) {
         const user = await this.userService.userLogin(userLoginDTO);
         if(user !== null && user !== undefined) {
@@ -48,8 +53,9 @@ export class UserController {
       
     }
     
-    @ApiBearerAuth()
     @Get('/info:email')
+    @ApiBearerAuth()
+    @ApiOkResponse({description: 'User info'})
     async userInfo(@Res() res, @Param('email') email: string) {
        const user = await this.userService.findUserByEmail(email);
        if (user) {

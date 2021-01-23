@@ -7,17 +7,16 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   const options = new DocumentBuilder()
-  .setTitle('My API')
-  .setDescription('API description')
-  .setVersion('1.0')
-  .addBearerAuth(
-    { type: 'http', scheme: 'bearer', bearerFormat: 'Token' },
-    'access-token',
-  )
+  .setTitle('Product-Fare-Api')
+  .setDescription('Product-Fare API')
+  .setVersion('1.0.0')
+  .setBasePath('api')
+  .addBearerAuth({ in: 'header', type: 'http' })
   .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('product-fare-api', app, document);
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
+  
 }
 bootstrap();

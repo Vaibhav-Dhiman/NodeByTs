@@ -6,8 +6,9 @@ backend user tasks-
 - login method added
 - password hash creation and storing done
 - login without jwt token done with bcrypt password
--created jwt token when user logins
-- add swagger for api test 
+- created jwt token when user logins
+- added swagger for api 
+= auth swagger not working now
 * add get bearer token get to swagger to authorized api's
 * forget password/reset password
-* send mail on restting new password
+* send mail on reseting new password
