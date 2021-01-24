@@ -4,11 +4,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './user.model';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UserLoginDTO } from './dto/user-login.dto';
-import { JwtService } from  '@nestjs/jwt';
+//import { JwtService } from  '@nestjs/jwt';
+//import { AuthService } from '../auth/services/auth/auth.service';
 
 @Injectable()
 export class UserService {
-    constructor(@InjectModel('User') private readonly userModel: Model<User>, private readonly jwtService: JwtService) {}
+    constructor(@InjectModel('User') private readonly userModel: Model<User>, 
+    //private readonly jwtService: JwtService, 
+    //private readonly authService: AuthService
+    ) {}
     
     async addUser(createUserDTO: CreateUserDTO): Promise<any> {
       try {
@@ -35,9 +39,9 @@ export class UserService {
       if (user !== null) {
         const hashPasswordFrmDb = user.password;
         const check =  await this.checkLogin(userLoginDTO.password, hashPasswordFrmDb);
-        if (check == true) {
+        if (check) {
           const payload = `${userLoginDTO.password}${userLoginDTO.email}`;
-          const accessToken = this.jwtService.sign(payload);
+          const accessToken = this.checkLogin(userLoginDTO.password, payload);
           return {
             expires_in: 3600,
             access_token: accessToken,

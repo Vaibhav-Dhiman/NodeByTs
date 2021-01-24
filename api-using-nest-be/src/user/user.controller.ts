@@ -53,7 +53,7 @@ export class UserController {
       
     }
     
-    @Get('/info:email')
+    @Get('/info/:email')
     @ApiBearerAuth()
     @ApiOkResponse({description: 'User info'})
     async userInfo(@Res() res, @Param('email') email: string) {
